@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>«Ақзере 2» балабақшасы</title>
-<meta name="description" content="«Ақзере» — Алматы қаласындағы жеке балабақша">
+<meta name="description" content="«Ақзере 2» — Алматы қаласындағы жеке балабақша">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
         <circle cx="34" cy="20" r="1.6" fill="var(--pink)"/>
         <circle cx="14" cy="30" r="1.6" fill="var(--teal)"/>
       </svg>
-      <span class="name brand">Ақзере 2<small data-i18n="brand.tagline">жеке балабақша · Алматы қаласы</small></span>
+      <span class="name brand">Ақзере 2<small data-i18n="brand.tagline">жеке балабақша</small></span>
     </a>
 
     <div class="nav-right">
@@ -119,6 +119,50 @@
         </div>
       </div>
     </div>
+  </section>
+        
+
+  <!-- ===== TEACHERS ===== -->
+  <section id="teachers">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="tag" data-i18n="teachers.tag">Біздің ұжым</span>
+        <h2 data-i18n="teachers.title">Біздің тәрбиешілер</h2>
+        <p data-i18n="teachers.lead">Балаларыңызға күн сайын қамқорлық жасайтын тәжірибелі әрі мейірімді мамандар.</p>
+      </div>
+      <div class="teachers-grid">
+        <div class="teacher-card">
+          <div class="teacher-photo"><img src="images/gallery/teacher-1.jpg" alt="Тәрбиеші 1" loading="lazy"></div>
+        </div>
+        <div class="teacher-card">
+          <div class="teacher-photo"><img src="images/gallery/teacher-2.jpg" alt="Тәрбиеші 2" loading="lazy"></div>
+        </div>
+        <div class="teacher-card">
+          <div class="teacher-photo"><img src="images/gallery/teacher-3.jpg" alt="Тәрбиеші 3" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PHOTO GALLERY ===== -->
+  <section id="photos">
+   <div class="wrap">
+     <div class="section-head">
+       <span class="tag" data-i18n="photos.tag">Галерея</span>
+       <h2 data-i18n="photos.title">Біздің балабақшадағы күндер</h2>
+       <p data-i18n="photos.lead">Топтарымыз, ойын аймақтары, тамақтану және балалардың күнделікті өмірінен фотосуреттер.</p>
+     </div>
+     <div class="photo-gallery">
+       <button type="button" class="ph" data-full="images/gallery/1.jpg" aria-label="Фото 1"><img src="images/gallery/1.jpg" alt="Фото 1" loading="lazy"></button>
+        <button type="button" class="ph" data-full="images/gallery/2.jpg" aria-label="Фото 2"><img src="images/gallery/2.jpg" alt="Фото 2" loading="lazy"></button>
+        <button type="button" class="ph" data-full="images/gallery/3.jpg" aria-label="Фото 3"><img src="images/gallery/3.jpg" alt="Фото 3" loading="lazy"></button>
+       <button type="button" class="ph" data-full="images/gallery/4.jpg" aria-label="Фото 4"><img src="images/gallery/4.jpg" alt="Фото 4" loading="lazy"></button>
+       <button type="button" class="ph" data-full="images/gallery/5.jpg" aria-label="Фото 5"><img src="images/gallery/5.jpg" alt="Фото 5" loading="lazy"></button>
+        <button type="button" class="ph" data-full="images/gallery/6.jpg" aria-label="Фото 6"><img src="images/gallery/6.jpg" alt="Фото 6" loading="lazy"></button>
+        <button type="button" class="ph" data-full="images/gallery/7.jpg" aria-label="Фото 7"><img src="images/gallery/7.jpg" alt="Фото 7" loading="lazy"></button>
+       <button type="button" class="ph" data-full="images/gallery/8.jpg" aria-label="Фото 8"><img src="images/gallery/8.jpg" alt="Фото 8" loading="lazy"></button>
+     </div>
+   </div>
   </section>
 
   <!-- ===== ADVANTAGES ===== -->
@@ -239,6 +283,14 @@
     </div>
   </section>
 
+  <!-- Контейнер лайтбокса -->
+  <div class="lb" id="lb" aria-hidden="true">
+    <button type="button" class="x" aria-label="Жабу">&times;</button>
+    <button type="button" class="p" aria-label="Алдыңғы">&#8249;</button>
+    <img alt="">
+    <button type="button" class="n" aria-label="Келесі">&#8250;</button>
+  </div>
+
 </main>
 
 <footer>
@@ -288,5 +340,25 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+(function(){
+  var lb=document.getElementById('lb'),img=lb.querySelector('img');
+  var items=[].slice.call(document.querySelectorAll('.photo-gallery .ph')),cur=0;
+  function show(i){cur=(i+items.length)%items.length;img.src=items[cur].dataset.full;}
+  function open(i){show(i);lb.classList.add('open');document.body.style.overflow='hidden';}
+  function close(){lb.classList.remove('open');document.body.style.overflow='';}
+  items.forEach(function(b,i){b.addEventListener('click',function(){open(i)})});
+  lb.querySelector('.x').onclick=close;
+  lb.querySelector('.p').onclick=function(e){e.stopPropagation();show(cur-1)};
+  lb.querySelector('.n').onclick=function(e){e.stopPropagation();show(cur+1)};
+  lb.addEventListener('click',function(e){if(e.target===lb||e.target===img)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowLeft')show(cur-1);
+    if(e.key==='ArrowRight')show(cur+1);
+  });
+})();
+</script>
 </body>
 </html>
